@@ -21,7 +21,7 @@ navigation:
     - label: Contact
       href: "#contact"
   ctaLabel: Susține-ne
-  ctaHref: "#sustine"
+  ctaHref: "https://formular230.ro/organizatia-nationala-cercetasii-romaniei-cluj-napoca"
 hero:
   badgeLabel: Scouts Cluj · 2026
   countdownDays: 118
@@ -32,7 +32,7 @@ hero:
   headline: Învățare în natură, impact real în comunitate.
   subheadline: Formăm tineri gata oricând, prin aventură, leadership și implicare civică. Un homepage modern, clar, orientat spre acțiune.
   primaryCtaLabel: Redirecționează 3.5%
-  primaryCtaHref: "#sustine"
+  primaryCtaHref: "https://formular230.ro/organizatia-nationala-cercetasii-romaniei-cluj-napoca"
   secondaryCtaLabel: Hai la cercetași
   secondaryCtaHref: "#despre"
   floatingLinks:

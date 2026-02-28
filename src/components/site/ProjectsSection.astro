@@ -10,12 +10,12 @@ interface Props {
 const { section, projects } = Astro.props;
 ---
 
-<section class="block projects" id={section.id}>
+<section class="block projects">
   <div class="container">
-    <SectionHeader title={section.title} description={section.description} />
+    <SectionHeader id={section.id} title={section.title} description={section.description} />
 
     <div class="projects-layout">
-      <article class="projects-main">
+      <article class="projects-main box-card">
         <img src={section.featured.image} alt={section.featured.title} class="projects-main-image" loading="eager" />
         <div class="projects-main-overlay"></div>
         <div class="projects-main-content">
@@ -30,7 +30,7 @@ const { section, projects } = Astro.props;
       <div class="projects-side">
         {
           projects.map((project) => (
-            <article class="project-card">
+            <article class="project-card box-card-border">
               <time>{project.data.period}</time>
               <h4>{project.data.title}</h4>
               <p>{project.data.summary}</p>

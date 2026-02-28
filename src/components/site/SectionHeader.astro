@@ -1,5 +1,6 @@
 ---
 interface Props {
+  id?: string;
   title: string;
   description?: string;
   ctaLabel?: string;
@@ -7,12 +8,12 @@ interface Props {
   ctaClass?: string;
 }
 
-const { title, description, ctaLabel, ctaHref, ctaClass = 'btn btn-white' } = Astro.props;
+const { id, title, description, ctaLabel, ctaHref, ctaClass = 'btn btn-white' } = Astro.props;
 ---
 
 <div class="section-head">
   <div>
-    <h2>{title}</h2>
+    <h2 id={id}>{title}</h2>
     {description && <p>{description}</p>}
   </div>
   {ctaLabel && ctaHref && (

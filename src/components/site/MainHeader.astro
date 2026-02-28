@@ -47,11 +47,17 @@ const { brand, navigation } = Astro.props;
     const header = document.querySelector('.topnav-wrap');
     if (!header) return;
 
+    const topnav = header.querySelector('.topnav');
     const toggle = header.querySelector('[data-menu-toggle]');
     const mobileMenu = header.querySelector('[data-mobile-menu]');
-    if (!toggle || !mobileMenu) return;
+    if (!topnav || !toggle || !mobileMenu) return;
 
     let closeTimer;
+
+    const syncHeaderHeight = () => {
+      const headerHeight = Math.ceil(topnav.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    };
 
     const setOpen = (open) => {
       clearTimeout(closeTimer);
@@ -73,6 +79,7 @@ const { brand, navigation } = Astro.props;
     };
 
     setOpen(false);
+    syncHeaderHeight();
 
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
@@ -80,18 +87,44 @@ const { brand, navigation } = Astro.props;
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setOpen(false));
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        const isHashLink = href && href.startsWith('#') && href.length > 1;
+
+        if (!isHashLink) {
+          setOpen(false);
+          return;
+        }
+
+        const target = document.querySelector(href);
+        if (!target) {
+          setOpen(false);
+          return;
+        }
+
+        event.preventDefault();
+        setOpen(false);
+
+        window.setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.history.pushState(null, '', href);
+        }, 280);
+      });
     });
 
     window.addEventListener(
       'resize',
       () => {
+        syncHeaderHeight();
         if (window.innerWidth > 760) {
           setOpen(false);
         }
       },
       { passive: true }
     );
+
+    window.addEventListener('load', syncHeaderHeight, { once: true });
+    document.fonts?.ready?.then(syncHeaderHeight).catch(() => {});
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {

@@ -17,14 +17,14 @@ const formatDate = (date: Date) =>
   }).format(date);
 ---
 
-<section class="block stories" id={section.id}>
+<section class="block stories">
   <div class="container">
-    <SectionHeader title={section.title} description={section.description} ctaLabel={section.ctaLabel} ctaHref={section.ctaHref} />
+    <SectionHeader id={section.id} title={section.title} description={section.description} ctaLabel={section.ctaLabel} ctaHref={section.ctaHref} />
 
     <div class="stories-grid">
       {
         stories.map((story) => (
-          <article class="story">
+          <article class="story box-card-border">
             <img src={story.data.image} alt={story.data.title} class="story-media" loading="lazy" />
             <div class="story-body">
               <time>{formatDate(story.data.date)}</time>

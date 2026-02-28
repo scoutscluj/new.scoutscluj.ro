@@ -1,17 +1,17 @@
 ---
-import type { HomePageData } from '../../types/content';
+import type { HomePageData } from "../../types/content";
 
 interface Props {
-  support: HomePageData['support'];
+  support: HomePageData["support"];
 }
 
 const { support } = Astro.props;
 ---
 
-<section class="block support" id={support.id}>
+<section class="block support">
   <div class="container support-wrap">
     <div>
-      <h2>{support.title}</h2>
+      <h2 id={support.id}>{support.title}</h2>
       <p>{support.description}</p>
       <div class="support-actions">
         <a class="btn btn-red" href={support.primaryCtaHref}>{support.primaryCtaLabel}</a>
@@ -20,7 +20,7 @@ const { support } = Astro.props;
     </div>
 
     <div>
-      <div class="goal">
+      <div class="goal box-card">
         <div class="goal-head">
           <span>{support.goalLabel}</span>
           <strong>{support.goalPercent}%</strong>
@@ -31,7 +31,7 @@ const { support } = Astro.props;
         <small>{support.goalProgressText}</small>
       </div>
 
-      <form class="newsletter" aria-label="Newsletter" action="#" method="post">
+      <form class="newsletter box-card" aria-label="Newsletter" action="#" method="post">
         <label for="newsletter-email">{support.newsletterLabel}</label>
         <div class="field">
           <input id="newsletter-email" type="email" placeholder={support.newsletterPlaceholder} />

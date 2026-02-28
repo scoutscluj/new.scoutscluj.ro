@@ -9,13 +9,13 @@ interface Props {
 const { timeline } = Astro.props;
 ---
 
-<section class="block timeline" id={timeline.id}>
+<section class="block timeline">
   <div class="container">
-    <SectionHeader title={timeline.title} description={timeline.description} />
+    <SectionHeader id={timeline.id} title={timeline.title} description={timeline.description} />
 
     <div class="timeline-row">
       {timeline.items.map((item) => (
-        <article class="timeline-item">
+        <article class="timeline-item box-card-border">
           <strong>{item.title}</strong>
           <p>{item.description}</p>
         </article>

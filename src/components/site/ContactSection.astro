@@ -1,40 +1,40 @@
 ---
-import type { HomePageData } from '../../types/content';
-import SectionHeader from './SectionHeader.astro';
+import type { HomePageData } from "../../types/content";
+import SectionHeader from "./SectionHeader.astro";
 
 interface Props {
-  contact: HomePageData['contactSection'];
+  contact: HomePageData["contactSection"];
 }
 
 const { contact } = Astro.props;
-const telHref = `tel:${contact.phone.replace(/\s+/g, '')}`;
+const telHref = `tel:${contact.phone.replace(/\s+/g, "")}`;
 ---
 
-<section class="block contact-home" id={contact.id}>
+<section class="block contact-home">
   <div class="container">
-    <SectionHeader title={contact.title} description={contact.description} />
+    <SectionHeader id={contact.id} title={contact.title} description={contact.description} />
 
     <div class="contact-layout">
-      <article class="contact-card">
+      <article class="contact-card box-card">
         <h3>{contact.addressLabel}</h3>
         <p>{contact.address}</p>
       </article>
 
-      <article class="contact-card">
+      <article class="contact-card box-card">
         <h3>{contact.emailLabel}</h3>
         <p>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </p>
       </article>
 
-      <article class="contact-card">
+      <article class="contact-card box-card">
         <h3>{contact.phoneLabel}</h3>
         <p>
           <a href={telHref}>{contact.phone}</a>
         </p>
       </article>
 
-      <article class="contact-card contact-card-bank">
+      <article class="contact-card box-card contact-card-bank">
         <h3>{contact.bankLabel}</h3>
         <p>{contact.bankAccountName}</p>
         <p>IBAN: {contact.iban}</p>
@@ -43,13 +43,7 @@ const telHref = `tel:${contact.phone.replace(/\s+/g, '')}`;
     </div>
 
     <div class="contact-map">
-      <iframe
-        src={contact.mapEmbedUrl}
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Scouts Cluj map"
-      ></iframe>
+      <iframe src={contact.mapEmbedUrl} loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Scouts Cluj map"></iframe>
       <a class="btn btn-white" href={contact.mapCtaHref} target="_blank" rel="noreferrer">
         {contact.mapCtaLabel}
       </a>
