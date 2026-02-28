@@ -992,7 +992,7 @@ section.block {
   flex-wrap: wrap;
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 920px) {
   .impact-grid,
   .pillars,
   .timeline-row,

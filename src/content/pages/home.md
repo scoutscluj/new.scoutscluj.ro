@@ -27,7 +27,7 @@ hero:
   countdownDays: 118
   countdownLabel: zile până la tabără
   countdownTargetDate: 24-08-2026
-  backgroundImagePlaceholder: /images/content/hero-2-blur.jpg
+  backgroundImagePlaceholder: /images/content/hero/hero-blur.jpg
   kicker: Campanie principală · Primăvară 2026
   headline: Învățare în natură, impact real în comunitate.
   subheadline: Formăm tineri gata oricând, prin aventură, leadership și implicare civică. Un homepage modern, clar, orientat spre acțiune.
@@ -48,7 +48,7 @@ hero:
       href: "#calendar"
   quickContactLabel: Contact rapid
   quickContactHref: "#contact"
-  backgroundImage: /images/content/hero-2.jpg
+  backgroundImage: /images/content/hero/hero.jpg
 impact:
   id: impact
   title: Educație pentru viață
@@ -80,7 +80,7 @@ projectsSection:
   featured:
     title: Festivalul Luminii 2026
     summary: Un eveniment-simbol pentru comunitate, construit cu cercetași, voluntari și parteneri locali.
-    image: /images/content/project-festival-luminii.jpg
+    image: /images/content/project/festivalul-luminii.jpg
     ctaLabel: Vezi detalii
     ctaHref: https://scoutscluj.ro/
 timeline:
