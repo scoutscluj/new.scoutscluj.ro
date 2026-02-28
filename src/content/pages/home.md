@@ -21,7 +21,7 @@ navigation:
     - label: Contact
       href: "#contact"
   ctaLabel: Susține-ne
-  ctaHref: "https://formular230.ro/organizatia-nationala-cercetasii-romaniei-cluj-napoca"
+  ctaHref: "#sustine"
 hero:
   badgeLabel: Scouts Cluj · 2026
   countdownDays: 118
