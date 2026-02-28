@@ -1,0 +1,58 @@
+---
+import type { HomePageData } from '../../types/content';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  contact: HomePageData['contactSection'];
+}
+
+const { contact } = Astro.props;
+const telHref = `tel:${contact.phone.replace(/\s+/g, '')}`;
+---
+
+<section class="block contact-home" id={contact.id}>
+  <div class="container">
+    <SectionHeader title={contact.title} description={contact.description} />
+
+    <div class="contact-layout">
+      <article class="contact-card">
+        <h3>{contact.addressLabel}</h3>
+        <p>{contact.address}</p>
+      </article>
+
+      <article class="contact-card">
+        <h3>{contact.emailLabel}</h3>
+        <p>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+      </article>
+
+      <article class="contact-card">
+        <h3>{contact.phoneLabel}</h3>
+        <p>
+          <a href={telHref}>{contact.phone}</a>
+        </p>
+      </article>
+
+      <article class="contact-card contact-card-bank">
+        <h3>{contact.bankLabel}</h3>
+        <p>{contact.bankAccountName}</p>
+        <p>IBAN: {contact.iban}</p>
+        <p>{contact.bankName}</p>
+      </article>
+    </div>
+
+    <div class="contact-map">
+      <iframe
+        src={contact.mapEmbedUrl}
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Scouts Cluj map"
+      ></iframe>
+      <a class="btn btn-white" href={contact.mapCtaHref} target="_blank" rel="noreferrer">
+        {contact.mapCtaLabel}
+      </a>
+    </div>
+  </div>
+</section>

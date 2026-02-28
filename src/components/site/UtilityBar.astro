@@ -10,7 +10,7 @@ const { utility } = Astro.props;
 
 <div class="utility">
   <div class="container utility-inner">
-    <span>{utility.leftText}</span>
+    <span class="utility-left">{utility.leftText}</span>
     <div class="utility-right">
       <a href={`mailto:${utility.email}`}>{utility.email}</a>
       <span aria-hidden="true">·</span>

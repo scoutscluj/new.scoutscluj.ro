@@ -30,6 +30,8 @@ const pages = defineCollection({
       badgeLabel: z.string(),
       countdownDays: z.number().int().min(0),
       countdownLabel: z.string(),
+      countdownTargetDate: z.string().optional(),
+      backgroundImagePlaceholder: z.string().optional(),
       kicker: z.string(),
       headline: z.string(),
       subheadline: z.string(),
@@ -105,6 +107,24 @@ const pages = defineCollection({
       newsletterPlaceholder: z.string(),
       newsletterButtonLabel: z.string()
     }),
+    contactSection: z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      addressLabel: z.string(),
+      address: z.string(),
+      emailLabel: z.string(),
+      email: z.string(),
+      phoneLabel: z.string(),
+      phone: z.string(),
+      bankLabel: z.string(),
+      bankAccountName: z.string(),
+      iban: z.string(),
+      bankName: z.string(),
+      mapEmbedUrl: z.string(),
+      mapCtaLabel: z.string(),
+      mapCtaHref: z.string()
+    }),
     footer: z.object({
       id: z.string(),
       heading: z.string(),
@@ -114,8 +134,7 @@ const pages = defineCollection({
       links: z.array(navLinkSchema),
       contactHeading: z.string(),
       location: z.string(),
-      copyright: z.string(),
-      note: z.string()
+      copyright: z.string()
     })
   })
 });

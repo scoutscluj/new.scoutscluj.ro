@@ -8,13 +8,18 @@ interface Props {
 const { hero } = Astro.props;
 ---
 
-<header class="hero" id="top">
-  <img src={hero.backgroundImage} alt="" class="hero-bg parallax" data-parallax-speed="0.64" data-parallax-scale="1.14" loading="eager" fetchpriority="high" />
+<header
+  class="hero parallax hero-loading"
+  id="top"
+  style={`--hero-bg-image: url('${hero.backgroundImage}'); --hero-bg-blur-image: url('${hero.backgroundImagePlaceholder ?? hero.backgroundImage}')`}
+  data-hero-image={hero.backgroundImage}
+  data-countdown-target={hero.countdownTargetDate ?? ''}
+>
   <div class="hero-ribbons" aria-hidden="true"></div>
   <div class="container hero-layout">
     <div class="hero-top">
       <div class="countdown">
-        <strong>{hero.countdownDays}</strong>
+        <strong data-countdown-value>{hero.countdownDays}</strong>
         <span>{hero.countdownLabel}</span>
       </div>
     </div>
@@ -29,3 +34,61 @@ const { hero } = Astro.props;
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const hero = document.querySelector('.hero[data-hero-image]');
+    if (hero) {
+      const imageUrl = hero.getAttribute('data-hero-image');
+      if (imageUrl) {
+        const preload = new Image();
+        preload.src = imageUrl;
+        if (preload.complete) {
+          hero.classList.remove('hero-loading');
+        } else {
+          preload.addEventListener('load', () => hero.classList.remove('hero-loading'), { once: true });
+          preload.addEventListener('error', () => hero.classList.remove('hero-loading'), { once: true });
+        }
+      } else {
+        hero.classList.remove('hero-loading');
+      }
+    }
+  })();
+</script>
+
+<script is:inline>
+  (() => {
+    const hero = document.querySelector('.hero[data-countdown-target]');
+    if (!hero) return;
+
+    const valueEl = hero.querySelector('[data-countdown-value]');
+    if (!valueEl) return;
+
+    const targetRaw = hero.getAttribute('data-countdown-target')?.trim();
+    if (!targetRaw) return;
+
+    const parseTargetDate = (input) => {
+      const dmy = input.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+      if (dmy) {
+        const [, dd, mm, yyyy] = dmy;
+        return Date.UTC(Number(yyyy), Number(mm) - 1, Number(dd));
+      }
+
+      const ymd = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (ymd) {
+        const [, yyyy, mm, dd] = ymd;
+        return Date.UTC(Number(yyyy), Number(mm) - 1, Number(dd));
+      }
+
+      return Number.NaN;
+    };
+
+    const targetUtc = parseTargetDate(targetRaw);
+    if (!Number.isFinite(targetUtc)) return;
+
+    const now = new Date();
+    const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    const diffDays = Math.ceil((targetUtc - todayUtc) / 86400000);
+    valueEl.textContent = String(Math.max(0, diffDays));
+  })();
+</script>

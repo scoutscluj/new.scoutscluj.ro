@@ -5,7 +5,7 @@ metaDescription: Cercetașii din Cluj-Napoca - educație pentru viață, proiect
 utility:
   leftText: Centru Local Scouts Cluj · Educație pentru viață
   email: cluj.napoca@scout.ro
-  phone: "+40 700 000 000"
+  phone: "+40 749 417 925"
 brand:
   name: Cercetașii României
   subtitle: Scouts Cluj
@@ -26,6 +26,8 @@ hero:
   badgeLabel: Scouts Cluj · 2026
   countdownDays: 118
   countdownLabel: zile până la tabără
+  countdownTargetDate: 24-08-2026
+  backgroundImagePlaceholder: /images/content/hero-2-blur.jpg
   kicker: Campanie principală · Primăvară 2026
   headline: Învățare în natură, impact real în comunitate.
   subheadline: Formăm tineri gata oricând, prin aventură, leadership și implicare civică. Un homepage modern, clar, orientat spre acțiune.
@@ -46,7 +48,7 @@ hero:
       href: "#calendar"
   quickContactLabel: Contact rapid
   quickContactHref: "#contact"
-  backgroundImage: /images/content/hero-background.jpg
+  backgroundImage: /images/content/hero-2.jpg
 impact:
   id: impact
   title: Educație pentru viață
@@ -114,8 +116,25 @@ support:
   newsletterLabel: Primește noutăți despre activități și înscrieri
   newsletterPlaceholder: Adresa ta de email
   newsletterButtonLabel: Abonează-mă
-footer:
+contactSection:
   id: contact
+  title: Contactează-ne
+  description: Vrei să ne întâlnim, să vorbim la telefon sau să ne scrii? Găsești aici datele principale de contact ale centrului local.
+  addressLabel: Adresă
+  address: Piața Mihai Viteazu 25-26, Cluj-Napoca
+  emailLabel: Email
+  email: cluj.napoca@scout.ro
+  phoneLabel: Telefon
+  phone: "+40 749 417 925"
+  bankLabel: Cont bancar
+  bankAccountName: ONCR CL CLUJ-NAPOCA
+  iban: RO31BTRL01301205971426XX
+  bankName: Banca Transilvania S.A.
+  mapEmbedUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d789.2543813488626!2d23.592394763910104!3d46.774473856817615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2e13d421a0ead4e5!2sScouts%20Cluj!5e0!3m2!1sen!2sro!4v1614345650137!5m2!1sen!2sro
+  mapCtaLabel: Vezi pe Google Maps
+  mapCtaHref: https://maps.google.com/?q=Scouts+Cluj
+footer:
+  id: footer
   heading: Scouts Cluj
   lineOne: Cercetașii României · Centru Local Cluj-Napoca
   lineTwo: Creăm o lume mai bună, pas cu pas.
@@ -132,6 +151,6 @@ footer:
   contactHeading: Contact
   location: Cluj-Napoca, România
   copyright: "© 2026 Cercetașii României - Scouts Cluj"
-  note: Homepage concept based on Proposal 02 (campaign hero direction)
 ---
+
 Scouts Cluj este un centru local orientat pe educație non-formală, proiecte comunitare și dezvoltare personală pentru copii și tineri.

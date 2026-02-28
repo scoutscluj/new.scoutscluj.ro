@@ -19,6 +19,11 @@ const { brand, navigation } = Astro.props;
       </span>
     </a>
 
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+      <span class="menu-toggle-label">Meniu</span>
+      <span class="menu-toggle-icon" aria-hidden="true"><span></span></span>
+    </button>
+
     <nav class="menu" aria-label="Main navigation">
       {navigation.links.map((link) => (
         <a href={link.href}>{link.label}</a>
@@ -26,4 +31,72 @@ const { brand, navigation } = Astro.props;
       <a class="btn btn-red" href={navigation.ctaHref}>{navigation.ctaLabel}</a>
     </nav>
   </div>
+
+  <nav class="mobile-menu" id="mobile-nav" aria-label="Mobile navigation" data-mobile-menu hidden>
+    <div class="container mobile-menu-inner">
+      {navigation.links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a class="btn btn-red" href={navigation.ctaHref}>{navigation.ctaLabel}</a>
+    </div>
+  </nav>
 </div>
+
+<script is:inline>
+  (() => {
+    const header = document.querySelector('.topnav-wrap');
+    if (!header) return;
+
+    const toggle = header.querySelector('[data-menu-toggle]');
+    const mobileMenu = header.querySelector('[data-mobile-menu]');
+    if (!toggle || !mobileMenu) return;
+
+    let closeTimer;
+
+    const setOpen = (open) => {
+      clearTimeout(closeTimer);
+      toggle.setAttribute('aria-expanded', String(open));
+
+      if (open) {
+        mobileMenu.hidden = false;
+        requestAnimationFrame(() => {
+          header.classList.add('is-open');
+        });
+        return;
+      }
+
+      header.classList.remove('is-open');
+      closeTimer = window.setTimeout(() => {
+        const isStillClosed = toggle.getAttribute('aria-expanded') === 'false';
+        if (isStillClosed) mobileMenu.hidden = true;
+      }, 260);
+    };
+
+    setOpen(false);
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    window.addEventListener(
+      'resize',
+      () => {
+        if (window.innerWidth > 760) {
+          setOpen(false);
+        }
+      },
+      { passive: true }
+    );
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    });
+  })();
+</script>

@@ -31,54 +31,5 @@ const {
   </head>
   <body>
     <slot />
-    <script is:inline>
-      (() => {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-        const elements = Array.from(document.querySelectorAll('.parallax'));
-        if (!elements.length) return;
-
-        for (const element of elements) {
-          const scale = Number.parseFloat(element.dataset.parallaxScale || '1.06');
-          if (Number.isFinite(scale)) {
-            element.style.setProperty('--parallax-scale', String(scale));
-          }
-        }
-
-        let ticking = false;
-
-        const updateParallax = () => {
-          const viewportHeight = window.innerHeight;
-          const viewportCenter = viewportHeight * 0.5;
-
-          for (const element of elements) {
-            const rect = element.getBoundingClientRect();
-            const isVisible = rect.bottom > -120 && rect.top < viewportHeight + 120;
-            if (!isVisible) continue;
-
-            const speed = Number.parseFloat(element.dataset.parallaxSpeed || '0.16');
-            const factor = Number.isFinite(speed) ? speed : 0.16;
-            const distanceFromCenter = rect.top + rect.height * 0.5 - viewportCenter;
-            const rawShift = -distanceFromCenter * factor;
-            const maxShift = Math.max(28, rect.height * 0.2);
-            const clampedShift = Math.max(-maxShift, Math.min(maxShift, rawShift));
-
-            element.style.setProperty('--parallax-shift', `${clampedShift.toFixed(2)}px`);
-          }
-
-          ticking = false;
-        };
-
-        const requestUpdate = () => {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(updateParallax);
-        };
-
-        updateParallax();
-        window.addEventListener('scroll', requestUpdate, { passive: true });
-        window.addEventListener('resize', requestUpdate, { passive: true });
-      })();
-    </script>
   </body>
 </html>
