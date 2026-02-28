@@ -1,0 +1,20 @@
+---
+import type { HomePageData } from '../../types/content';
+
+interface Props {
+  utility: HomePageData['utility'];
+}
+
+const { utility } = Astro.props;
+---
+
+<div class="utility">
+  <div class="container utility-inner">
+    <span>{utility.leftText}</span>
+    <div class="utility-right">
+      <a href={`mailto:${utility.email}`}>{utility.email}</a>
+      <span aria-hidden="true">·</span>
+      <a href={`tel:${utility.phone.replace(/\s+/g, '')}`}>{utility.phone}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+---
+import type { HomePageData, StoryEntry } from "../../types/content";
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  section: HomePageData["storiesSection"];
+  stories: StoryEntry[];
+}
+
+const { section, stories } = Astro.props;
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("ro-RO", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  }).format(date);
+---
+
+<section class="block stories" id={section.id}>
+  <div class="container">
+    <SectionHeader title={section.title} description={section.description} ctaLabel={section.ctaLabel} ctaHref={section.ctaHref} />
+
+    <div class="stories-grid">
+      {
+        stories.map((story) => (
+          <article class="story">
+            <img src={story.data.image} alt={story.data.title} class="story-media" loading="lazy" />
+            <div class="story-body">
+              <time>{formatDate(story.data.date)}</time>
+              <h3>{story.data.title}</h3>
+              <p>{story.data.excerpt}</p>
+              <a href={story.data.href}>Citește povestea</a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

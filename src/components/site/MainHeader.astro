@@ -1,0 +1,29 @@
+---
+import type { HomePageData } from '../../types/content';
+
+interface Props {
+  brand: HomePageData['brand'];
+  navigation: HomePageData['navigation'];
+}
+
+const { brand, navigation } = Astro.props;
+---
+
+<div class="topnav-wrap">
+  <div class="container topnav">
+    <a class="brand" href="#top">
+      <img class="brand-logo" src="/images/brand/logo.png" alt="" width="38" height="38" />
+      <span>
+        {brand.name}
+        <small>{brand.subtitle}</small>
+      </span>
+    </a>
+
+    <nav class="menu" aria-label="Main navigation">
+      {navigation.links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a class="btn btn-red" href={navigation.ctaHref}>{navigation.ctaLabel}</a>
+    </nav>
+  </div>
+</div>

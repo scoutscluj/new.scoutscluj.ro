@@ -1,0 +1,25 @@
+---
+import type { HomePageData } from '../../types/content';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  timeline: HomePageData['timeline'];
+}
+
+const { timeline } = Astro.props;
+---
+
+<section class="block timeline" id={timeline.id}>
+  <div class="container">
+    <SectionHeader title={timeline.title} description={timeline.description} />
+
+    <div class="timeline-row">
+      {timeline.items.map((item) => (
+        <article class="timeline-item">
+          <strong>{item.title}</strong>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+---
+import '../styles/site.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Scouts Cluj',
+  description = 'Cercetașii din Cluj-Napoca'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      (() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const elements = Array.from(document.querySelectorAll('.parallax'));
+        if (!elements.length) return;
+
+        for (const element of elements) {
+          const scale = Number.parseFloat(element.dataset.parallaxScale || '1.06');
+          if (Number.isFinite(scale)) {
+            element.style.setProperty('--parallax-scale', String(scale));
+          }
+        }
+
+        let ticking = false;
+
+        const updateParallax = () => {
+          const viewportHeight = window.innerHeight;
+          const viewportCenter = viewportHeight * 0.5;
+
+          for (const element of elements) {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.bottom > -120 && rect.top < viewportHeight + 120;
+            if (!isVisible) continue;
+
+            const speed = Number.parseFloat(element.dataset.parallaxSpeed || '0.16');
+            const factor = Number.isFinite(speed) ? speed : 0.16;
+            const distanceFromCenter = rect.top + rect.height * 0.5 - viewportCenter;
+            const rawShift = -distanceFromCenter * factor;
+            const maxShift = Math.max(28, rect.height * 0.2);
+            const clampedShift = Math.max(-maxShift, Math.min(maxShift, rawShift));
+
+            element.style.setProperty('--parallax-shift', `${clampedShift.toFixed(2)}px`);
+          }
+
+          ticking = false;
+        };
+
+        const requestUpdate = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(updateParallax);
+        };
+
+        updateParallax();
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

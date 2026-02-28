@@ -1,0 +1,204 @@
+backend:
+  name: test-repo
+
+local_backend: false
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Homepage"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
+
+          - label: "Utility"
+            name: "utility"
+            widget: "object"
+            fields:
+              - { label: "Left text", name: "leftText", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
+
+          - label: "Brand"
+            name: "brand"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Short Label", name: "shortLabel", widget: "string" }
+
+          - label: "Navigation"
+            name: "navigation"
+            widget: "object"
+            fields:
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+              - { label: "CTA Label", name: "ctaLabel", widget: "string" }
+              - { label: "CTA Href", name: "ctaHref", widget: "string" }
+
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Badge Label", name: "badgeLabel", widget: "string" }
+              - { label: "Countdown Days", name: "countdownDays", widget: "number", value_type: "int" }
+              - { label: "Countdown Label", name: "countdownLabel", widget: "string" }
+              - { label: "Kicker", name: "kicker", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subheadline", name: "subheadline", widget: "text" }
+              - { label: "Primary CTA Label", name: "primaryCtaLabel", widget: "string" }
+              - { label: "Primary CTA Href", name: "primaryCtaHref", widget: "string" }
+              - { label: "Secondary CTA Label", name: "secondaryCtaLabel", widget: "string" }
+              - { label: "Secondary CTA Href", name: "secondaryCtaHref", widget: "string" }
+              - label: "Floating Links"
+                name: "floatingLinks"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+              - { label: "Quick Contact Label", name: "quickContactLabel", widget: "string" }
+              - { label: "Quick Contact Href", name: "quickContactHref", widget: "string" }
+              - { label: "Background Image", name: "backgroundImage", widget: "string" }
+
+          - label: "Impact"
+            name: "impact"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Metrics"
+                name: "metrics"
+                widget: "list"
+                fields:
+                  - { label: "Value", name: "value", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Note", name: "note", widget: "string" }
+              - label: "Pillars"
+                name: "pillars"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Projects Section"
+            name: "projectsSection"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Featured"
+                name: "featured"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Summary", name: "summary", widget: "text" }
+                  - { label: "Image", name: "image", widget: "string" }
+                  - { label: "CTA Label", name: "ctaLabel", widget: "string" }
+                  - { label: "CTA Href", name: "ctaHref", widget: "string" }
+
+          - label: "Timeline"
+            name: "timeline"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Stories Section"
+            name: "storiesSection"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "CTA Label", name: "ctaLabel", widget: "string" }
+              - { label: "CTA Href", name: "ctaHref", widget: "string" }
+
+          - label: "Support"
+            name: "support"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Primary CTA Label", name: "primaryCtaLabel", widget: "string" }
+              - { label: "Primary CTA Href", name: "primaryCtaHref", widget: "string" }
+              - { label: "Secondary CTA Label", name: "secondaryCtaLabel", widget: "string" }
+              - { label: "Secondary CTA Href", name: "secondaryCtaHref", widget: "string" }
+              - { label: "Goal Label", name: "goalLabel", widget: "string" }
+              - { label: "Goal Percent", name: "goalPercent", widget: "number", value_type: "int" }
+              - { label: "Goal Progress Text", name: "goalProgressText", widget: "string" }
+              - { label: "Newsletter Label", name: "newsletterLabel", widget: "string" }
+              - { label: "Newsletter Placeholder", name: "newsletterPlaceholder", widget: "string" }
+              - { label: "Newsletter Button Label", name: "newsletterButtonLabel", widget: "string" }
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Line One", name: "lineOne", widget: "string" }
+              - { label: "Line Two", name: "lineTwo", widget: "string" }
+              - { label: "Links Heading", name: "linksHeading", widget: "string" }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+              - { label: "Contact Heading", name: "contactHeading", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Copyright", name: "copyright", widget: "string" }
+              - { label: "Note", name: "note", widget: "string" }
+
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "stories"
+    label: "Stories"
+    folder: "src/content/stories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Image URL", name: "image", widget: "string" }
+      - { label: "Story URL", name: "href", widget: "string" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Period", name: "period", widget: "string" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["active", "seasonal", "archived"]
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Body", name: "body", widget: "markdown", required: false }

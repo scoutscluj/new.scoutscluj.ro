@@ -1,0 +1,47 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import HeroCampaign from '../components/site/HeroCampaign.astro';
+import ImpactSection from '../components/site/ImpactSection.astro';
+import MainHeader from '../components/site/MainHeader.astro';
+import ProjectsSection from '../components/site/ProjectsSection.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import StoriesSection from '../components/site/StoriesSection.astro';
+import SupportSection from '../components/site/SupportSection.astro';
+import TimelineSection from '../components/site/TimelineSection.astro';
+import UtilityBar from '../components/site/UtilityBar.astro';
+
+const home = await getEntry('pages', 'home');
+
+if (!home) {
+  throw new Error('Missing content entry: src/content/pages/home.md');
+}
+
+const stories = (await getCollection('stories', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const projects = (await getCollection('projects', ({ data }) => data.status !== 'archived')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const { Content } = await home.render();
+---
+
+<Layout title={home.data.title} description={home.data.metaDescription}>
+  <UtilityBar utility={home.data.utility} />
+  <MainHeader brand={home.data.brand} navigation={home.data.navigation} />
+  <HeroCampaign hero={home.data.hero} />
+
+  <main>
+    <ImpactSection impact={home.data.impact}>
+      <Content />
+    </ImpactSection>
+    <ProjectsSection section={home.data.projectsSection} projects={projects} />
+    <TimelineSection timeline={home.data.timeline} />
+    <StoriesSection section={home.data.storiesSection} stories={stories} />
+    <SupportSection support={home.data.support} />
+  </main>
+
+  <SiteFooter brand={home.data.brand} utility={home.data.utility} footer={home.data.footer} />
+</Layout>

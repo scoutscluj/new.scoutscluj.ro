@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaClass?: string;
+}
+
+const { title, description, ctaLabel, ctaHref, ctaClass = 'btn btn-white' } = Astro.props;
+---
+
+<div class="section-head">
+  <div>
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+  {ctaLabel && ctaHref && (
+    <a class={ctaClass} href={ctaHref}>{ctaLabel}</a>
+  )}
+</div>

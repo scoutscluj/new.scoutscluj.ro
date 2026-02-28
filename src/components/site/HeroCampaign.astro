@@ -1,0 +1,31 @@
+---
+import type { HomePageData } from "../../types/content";
+
+interface Props {
+  hero: HomePageData["hero"];
+}
+
+const { hero } = Astro.props;
+---
+
+<header class="hero" id="top">
+  <img src={hero.backgroundImage} alt="" class="hero-bg parallax" data-parallax-speed="0.64" data-parallax-scale="1.14" loading="eager" fetchpriority="high" />
+  <div class="hero-ribbons" aria-hidden="true"></div>
+  <div class="container hero-layout">
+    <div class="hero-top">
+      <div class="countdown">
+        <strong>{hero.countdownDays}</strong>
+        <span>{hero.countdownLabel}</span>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <h1>{hero.headline}</h1>
+      <p>{hero.subheadline}</p>
+      <div class="hero-actions">
+        <a class="btn btn-red" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
+        <a class="btn btn-white" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
+      </div>
+    </div>
+  </div>
+</header>

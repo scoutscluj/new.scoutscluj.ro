@@ -1,0 +1,55 @@
+---
+import type { HomePageData } from '../../types/content';
+
+interface Props {
+  brand: HomePageData['brand'];
+  utility: HomePageData['utility'];
+  footer: HomePageData['footer'];
+}
+
+const { brand, utility, footer } = Astro.props;
+---
+
+<footer class="footer" id={footer.id}>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <i></i>
+          <h3>{footer.heading}</h3>
+        </div>
+        <p>{footer.lineOne}</p>
+        <p>{footer.lineTwo}</p>
+      </div>
+
+      <div>
+        <h4>{footer.linksHeading}</h4>
+        <ul>
+          {footer.links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4>{footer.contactHeading}</h4>
+        <ul>
+          <li>
+            <a href={`mailto:${utility.email}`}>{utility.email}</a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/ScoutsCluj/" target="_blank" rel="noreferrer">Facebook / {brand.subtitle}</a>
+          </li>
+          <li>{footer.location}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="credits">
+      <small>{footer.copyright}</small>
+      <small>{footer.note}</small>
+    </div>
+  </div>
+</footer>

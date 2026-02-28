@@ -1,0 +1,43 @@
+---
+import type { HomePageData, ProjectEntry } from "../../types/content";
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  section: HomePageData["projectsSection"];
+  projects: ProjectEntry[];
+}
+
+const { section, projects } = Astro.props;
+---
+
+<section class="block projects" id={section.id}>
+  <div class="container">
+    <SectionHeader title={section.title} description={section.description} />
+
+    <div class="projects-layout">
+      <article class="projects-main">
+        <img src={section.featured.image} alt={section.featured.title} class="projects-main-image" loading="eager" />
+        <div class="projects-main-overlay"></div>
+        <div class="projects-main-content">
+          <h3>{section.featured.title}</h3>
+          <p>{section.featured.summary}</p>
+          <div class="projects-main-action">
+            <a class="btn btn-white" href={section.featured.ctaHref}>{section.featured.ctaLabel}</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="projects-side">
+        {
+          projects.map((project) => (
+            <article class="project-card">
+              <time>{project.data.period}</time>
+              <h4>{project.data.title}</h4>
+              <p>{project.data.summary}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
