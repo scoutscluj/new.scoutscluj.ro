@@ -14,7 +14,16 @@ const { support } = Astro.props;
       <h2 id={support.id}>{support.title}</h2>
       <p>{support.description}</p>
       <div class="support-actions">
-        <a class="btn btn-red" href={support.primaryCtaHref}>{support.primaryCtaLabel}</a>
+        <div class="support-primary-actions">
+          <a class="btn btn-red" href={support.primaryCtaHref}>{support.primaryCtaLabel}</a>
+          <a
+            class="btn btn-white"
+            href="/docs/Formular230%20Cercetasii%20Romaniei%20Cluj.pdf"
+            download="Formular230-Cercetasii-Romaniei-Cluj.pdf"
+          >
+            Descarca formularul 230
+          </a>
+        </div>
         <a class="btn btn-white" href={support.secondaryCtaHref}>{support.secondaryCtaLabel}</a>
       </div>
     </div>

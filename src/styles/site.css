@@ -780,6 +780,12 @@ section.block {
   flex-wrap: wrap;
 }
 
+.support-primary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .goal {
   --box-border: #e5e5e5;
   --box-radius: 16px;
