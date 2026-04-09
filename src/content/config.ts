@@ -1,12 +1,14 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const navLinkSchema = z.object({
   label: z.string(),
   href: z.string()
 });
 
+const utilityVisibilitySchema = z.enum(["all", "sm", "md", "lg", "xl", "2xl"]);
+
 const pages = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -14,7 +16,8 @@ const pages = defineCollection({
     utility: z.object({
       leftText: z.string(),
       email: z.string(),
-      phone: z.string()
+      phone: z.string(),
+      visibility: utilityVisibilitySchema.default("all")
     }),
     brand: z.object({
       name: z.string(),
@@ -140,7 +143,7 @@ const pages = defineCollection({
 });
 
 const stories = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -152,12 +155,12 @@ const stories = defineCollection({
 });
 
 const projects = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
     period: z.string(),
     summary: z.string(),
-    status: z.enum(['active', 'seasonal', 'archived']),
+    status: z.enum(["active", "seasonal", "archived"]),
     order: z.number().int().nonnegative().default(99)
   })
 });

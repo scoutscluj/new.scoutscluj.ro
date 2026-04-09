@@ -6,9 +6,18 @@ interface Props {
 }
 
 const { utility } = Astro.props;
+
+const visibilityClass = {
+  all: 'utility-visible-all',
+  sm: 'utility-visible-sm',
+  md: 'utility-visible-md',
+  lg: 'utility-visible-lg',
+  xl: 'utility-visible-xl',
+  '2xl': 'utility-visible-2xl'
+}[utility.visibility ?? 'all'];
 ---
 
-<div class="utility">
+<div class:list={['utility', visibilityClass]}>
   <div class="container utility-inner">
     <span class="utility-left">{utility.leftText}</span>
     <div class="utility-right">

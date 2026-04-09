@@ -25,6 +25,18 @@ collections:
               - { label: "Left text", name: "leftText", widget: "string" }
               - { label: "Email", name: "email", widget: "string" }
               - { label: "Phone", name: "phone", widget: "string" }
+              - label: "Visibility"
+                name: "visibility"
+                widget: "select"
+                default: "all"
+                hint: "Shows through this breakpoint. sm = smaller screens, md = sm + md, lg = up to lg, all = everywhere."
+                options:
+                  - { label: "All screens", value: "all" }
+                  - { label: "Through sm", value: "sm" }
+                  - { label: "Through md", value: "md" }
+                  - { label: "Through lg", value: "lg" }
+                  - { label: "Through xl", value: "xl" }
+                  - { label: "Through 2xl", value: "2xl" }
 
           - label: "Brand"
             name: "brand"

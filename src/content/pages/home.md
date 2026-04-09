@@ -6,6 +6,7 @@ utility:
   leftText: Centru Local Scouts Cluj · Educație pentru viață
   email: cluj.napoca@scout.ro
   phone: "+40 749 417 925"
+  visibility: sm
 brand:
   name: Cercetașii României
   subtitle: Scouts Cluj
