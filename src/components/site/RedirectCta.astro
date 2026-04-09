@@ -1,0 +1,72 @@
+---
+interface Props {
+  label: string;
+  onlineHref: string;
+  downloadHref?: string;
+  downloadFilename?: string;
+}
+
+const {
+  label,
+  onlineHref,
+  downloadHref = '/formular230.pdf',
+  downloadFilename = 'formular230.pdf'
+} = Astro.props;
+---
+
+<details class="cta-menu">
+  <summary class="btn btn-red cta-menu-toggle">
+    <span>{label}</span>
+    <span class="cta-menu-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="cta-menu-panel">
+    <a class="cta-menu-link" href={onlineHref}>Online</a>
+    <a class="cta-menu-link" href={downloadHref} download={downloadFilename}>Descarcă formular</a>
+  </div>
+</details>
+
+<script is:inline>
+  (() => {
+    const menus = Array.from(document.querySelectorAll('.cta-menu'));
+    if (!menus.length) return;
+
+    const closeOthers = (current) => {
+      menus.forEach((menu) => {
+        if (menu !== current) {
+          menu.removeAttribute('open');
+        }
+      });
+    };
+
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      if (!summary) return;
+
+      summary.addEventListener('click', () => {
+        if (!menu.hasAttribute('open')) {
+          closeOthers(menu);
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+
+      menus.forEach((menu) => {
+        if (!menu.contains(target)) {
+          menu.removeAttribute('open');
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+
+      menus.forEach((menu) => {
+        menu.removeAttribute('open');
+      });
+    });
+  })();
+</script>

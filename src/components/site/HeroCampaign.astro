@@ -1,5 +1,6 @@
 ---
 import type { HomePageData } from "../../types/content";
+import RedirectCta from './RedirectCta.astro';
 
 interface Props {
   hero: HomePageData["hero"];
@@ -29,7 +30,7 @@ const { hero } = Astro.props;
       <p>{hero.subheadline}</p>
       <div class="hero-actions">
         <a class="btn btn-white" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
-        <a class="btn btn-red" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
+        <RedirectCta label={hero.primaryCtaLabel} onlineHref={hero.primaryCtaHref} />
       </div>
     </div>
   </div>

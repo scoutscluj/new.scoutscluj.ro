@@ -1,0 +1,201 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import MainHeader from '../components/site/MainHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import UtilityBar from '../components/site/UtilityBar.astro';
+
+const home = await getEntry('pages', 'home');
+
+if (!home) {
+  throw new Error('Missing content entry: src/content/pages/home.md');
+}
+
+const toAbsoluteHref = (href: string) => (href.startsWith('#') ? `/${href}` : href);
+
+const pageNavigation = {
+  ...home.data.navigation,
+  links: home.data.navigation.links.map((link) => ({
+    ...link,
+    href: toAbsoluteHref(link.href)
+  })),
+  ctaHref: toAbsoluteHref(home.data.navigation.ctaHref)
+};
+
+const pageFooter = {
+  ...home.data.footer,
+  links: home.data.footer.links.map((link) => ({
+    ...link,
+    href: toAbsoluteHref(link.href)
+  }))
+};
+
+const branches = [
+  {
+    title: 'Lider',
+    age: '18 ani +',
+    status: 'Rol activ',
+    description:
+      'Liderii nu reprezintă o altă ramură de vârstă, ci o categorie de adulți care sprijină și lucrează direct în dezvoltarea copiilor și tinerilor.',
+    note: 'Un rol potrivit pentru adulții care vor să susțină creșterea unei noi generații.'
+  },
+  {
+    title: 'Senior',
+    age: '18-24 ani',
+    status: 'Ramură de vârstă',
+    description:
+      'Seniorii sunt ultima ramură de vârstă, de la clasa a XII-a până la terminarea facultății, cu accent pe autonomie, inițiativă și asumarea propriului traseu.',
+    note: 'Pentru tineri care vor să îmbine experiențele cercetășești cu dezvoltarea personală și profesională.'
+  },
+  {
+    title: 'eXplorator',
+    age: '15-18 ani',
+    status: 'Ramură de vârstă',
+    description:
+      'Exploratorii sunt adolescenții din clasele IX-XII care învață prin proiecte, provocări outdoor și experiențe care dezvoltă leadershipul și spiritul de echipă.',
+    note: 'Un cadru bun pentru cei care vor mai multă responsabilitate și inițiativă.'
+  },
+  {
+    title: 'Temerar',
+    age: '11-14 ani',
+    status: 'Înscrieri momentan indisponibile',
+    description:
+      'Temerarii reprezintă a doua ramură de vârstă, pentru clasele V-VIII, într-o etapă în care explorarea, lucrul în echipă și curiozitatea devin esențiale.',
+    note: 'Înscrierile pentru această ramură sunt momentan indisponibile.'
+  },
+  {
+    title: 'Lupișor',
+    age: '7-10 ani',
+    status: 'Înscrieri momentan indisponibile',
+    description:
+      'Lupișorii sunt prima ramură de vârstă, pentru clasele I-IV, unde imaginația, jocul și învățarea prin povești devin baza experienței cercetășești.',
+    note: 'Înscrierile pentru această ramură sunt momentan indisponibile.'
+  }
+];
+
+const steps = [
+  {
+    title: 'Alegi ramura potrivită',
+    description: 'Începem cu grupa de vârstă potrivită și cu o discuție simplă despre disponibilitate, ritm și așteptări.'
+  },
+  {
+    title: 'Ne cunoaștem',
+    description: 'Stabilim un prim contact și îți spunem concret cum funcționează activitățile, întâlnirile și calendarul.'
+  },
+  {
+    title: 'Intri în experiență',
+    description: 'Participi la activități reale, în echipă, cu accent pe autonomie, implicare și învățare prin acțiune.'
+  }
+];
+---
+
+<Layout title="Hai la cercetași | Scouts Cluj" description="Alege ramura de vârstă potrivită și descoperă cum poți intra în comunitatea Scouts Cluj.">
+  <UtilityBar utility={home.data.utility} />
+  <MainHeader brand={home.data.brand} navigation={pageNavigation} homeHref="/" />
+
+  <header
+    class="hero join-hero"
+    id="top"
+    style={`--hero-bg-image: url('${home.data.hero.backgroundImage}'); --hero-bg-blur-image: url('${home.data.hero.backgroundImagePlaceholder ?? home.data.hero.backgroundImage}')`}
+  >
+    <div class="hero-ribbons" aria-hidden="true"></div>
+    <div class="container join-hero-layout">
+      <div class="join-hero-copy">
+        <span class="join-kicker">Gata oricând?</span>
+        <h1>Hai la cercetași</h1>
+        <p>
+          Cercetășia înseamnă educație prin experiență, apartenență la o comunitate și contexte reale în care copiii,
+          tinerii și adulții cresc împreună.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#ramuri">Vezi ramurile de vârstă</a>
+          <a class="btn btn-white" href={`mailto:${home.data.utility.email}`}>Scrie-ne</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="join-main">
+    <section class="block join-intro-section">
+      <div class="container join-intro">
+        <div>
+          <span class="section-label">Ce găsești la noi</span>
+          <h2>Un traseu educativ construit pe vârstă, autonomie și responsabilitate.</h2>
+        </div>
+        <p>
+          Fiecare ramură are propriul ritm, propriile provocări și propriul mod de a transforma aventura în învățare.
+          Pagina veche vorbea despre aceste etape separat; aici le-am adus într-o structură mai clară și mai ușor de parcurs.
+        </p>
+      </div>
+    </section>
+
+    <section class="block join-branches-section" id="ramuri">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Ramuri de vârstă</h2>
+            <p>
+              Fiecare etapă vine cu un cadru potrivit de învățare, responsabilitate și apartenență la grup.
+            </p>
+          </div>
+        </div>
+
+        <div class="join-branches-grid">
+          {branches.map((branch) => (
+            <article class="join-branch box-card">
+              <div class="join-branch-top">
+                <span class="join-age">{branch.age}</span>
+                <span class:list={['join-status', branch.status.includes('indisponibile') && 'is-muted']}>{branch.status}</span>
+              </div>
+              <h3>{branch.title}</h3>
+              <p>{branch.description}</p>
+              <small>{branch.note}</small>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="block join-steps-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Cum începe</h2>
+            <p>Nu intri într-un formular abstract. Intri într-o comunitate, cu oameni, ritm, întâlniri și proiecte reale.</p>
+          </div>
+        </div>
+
+        <div class="join-steps-grid">
+          {steps.map((step, index) => (
+            <article class="join-step box-card-border">
+              <span class="join-step-number">0{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="block join-cta-section">
+      <div class="container">
+        <div class="join-cta box-card">
+          <div>
+            <span class="section-label">Ai întrebări?</span>
+            <h2>Spune-ne ce vârstă are copilul sau în ce etapă ești tu, iar noi te orientăm.</h2>
+            <p>
+              Dacă o ramură este momentan indisponibilă, îți spunem direct. Dacă există locuri sau următorii pași potriviți,
+              îi clarificăm împreună.
+            </p>
+          </div>
+          <div class="join-cta-actions">
+            <a class="btn btn-red" href={`mailto:${home.data.utility.email}`}>Scrie-ne pe email</a>
+            <a class="btn btn-white" href="/#contact">Vezi contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={home.data.brand} utility={home.data.utility} footer={pageFooter} />
+</Layout>

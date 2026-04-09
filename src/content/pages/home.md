@@ -31,11 +31,11 @@ hero:
   backgroundImagePlaceholder: /images/content/hero/hero-blur.jpg
   kicker: Campanie principală · Primăvară 2026
   headline: Învățare în natură, impact real în comunitate.
-  subheadline: Formăm tineri gata oricând, prin aventură, leadership și implicare civică. Un homepage modern, clar, orientat spre acțiune.
+  subheadline: Formăm tineri pregătiți, prin aventură, leadership și implicare civică. Învățăm prin experiență, conducem prin exemplu și acționăm acolo unde este nevoie.
   primaryCtaLabel: Redirecționează 3.5%
   primaryCtaHref: "https://formular230.ro/organizatia-nationala-cercetasii-romaniei-cluj-napoca"
   secondaryCtaLabel: Hai la cercetași
-  secondaryCtaHref: "#despre"
+  secondaryCtaHref: "/hai-la-cercetasi"
   floatingLinks:
     - label: Despre noi
       href: "#despre"
@@ -53,7 +53,7 @@ hero:
 impact:
   id: impact
   title: Educație pentru viață
-  description: Punem accent pe rezultate concrete, nu pe text lung. Fiecare secțiune explică rapid ce facem și ce schimbăm în Cluj.
+  description: Cercetășia este o mişcare educativă a copiilor şi tinerilor, bazată pe voluntariat, cu caracter apolitic, deschisă tuturor, fără deosebire de naţionalitate, rasă, sex, credinţă sau condiţie socială, în concordanţă cu principiile şi metoda cercetășească.
   metrics:
     - value: 300+
       label: cercetași și voluntari activi
@@ -68,12 +68,12 @@ impact:
       label: ore de voluntariat
       note: investite în ultimii ani
   pillars:
-    - title: Leadership practic
-      description: Copiii și tinerii învață să coordoneze, să comunice și să ia decizii în echipă.
+    - title: Leadership autentic
+      description: Învățăm să conducem prin exemplu, cu inițiativă, curaj și grijă față de ceilalți.
     - title: Autonomie și responsabilitate
       description: Învățăm prin acțiune, cu obiective clare, reflecție și progres real.
-    - title: Comunitate și natură
-      description: Conectăm educația non-formală cu nevoile comunității locale și mediului.
+    - title: Implicare în comunitate
+      description: Transformăm energia grupului în proiecte locale, voluntariat și acțiuni cu efect concret.
 projectsSection:
   id: proiecte
   title: Proiecte în focus
@@ -154,4 +154,4 @@ footer:
   copyright: "© 2026 Cercetașii României - Scouts Cluj"
 ---
 
-Scouts Cluj este un centru local orientat pe educație non-formală, proiecte comunitare și dezvoltare personală pentru copii și tineri.
+Rolul unui cercetaș este să lase lumea „un pic mai bună decât a găsit-o”. Scouts Cluj se implică activ în viața orașului prin parteneriate locale, evenimente și proiecte cu caracter social, implicarea membrilor în acțiuni care răspund nevoilor reale ale comunității clujene.
