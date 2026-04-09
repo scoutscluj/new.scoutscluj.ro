@@ -1026,11 +1026,16 @@ section.block {
   --box-radius: 14px;
   width: 100%;
   padding: 12px;
+  border: 0;
   display: grid;
   gap: 7px;
   text-align: left;
   cursor: pointer;
   background: #fff;
+  color: var(--ink);
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -1066,6 +1071,7 @@ section.block {
 
 .project-card h4 {
   margin: 0;
+  color: inherit;
   font-size: 1rem;
   font-family: 'Sora', sans-serif;
   letter-spacing: -0.01em;
