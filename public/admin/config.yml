@@ -208,6 +208,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Period", name: "period", widget: "string" }
       - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Image", name: "image", widget: "string" }
+      - { label: "CTA Label", name: "ctaLabel", widget: "string" }
+      - { label: "CTA Href", name: "ctaHref", widget: "string" }
       - label: "Status"
         name: "status"
         widget: "select"

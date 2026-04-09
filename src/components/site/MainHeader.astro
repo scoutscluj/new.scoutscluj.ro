@@ -1,13 +1,13 @@
 ---
-import type { HomePageData } from '../../types/content';
+import type { HomePageData } from "../../types/content";
 
 interface Props {
-  brand: HomePageData['brand'];
-  navigation: HomePageData['navigation'];
+  brand: HomePageData["brand"];
+  navigation: HomePageData["navigation"];
   homeHref?: string;
 }
 
-const { brand, navigation, homeHref = '#top' } = Astro.props;
+const { brand, navigation, homeHref = "#top" } = Astro.props;
 ---
 
 <div class="topnav-wrap">
@@ -26,18 +26,14 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
     </button>
 
     <nav class="menu" aria-label="Main navigation">
-      {navigation.links.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+      {navigation.links.map((link) => <a href={link.href}>{link.label}</a>)}
       <a class="btn btn-red" href={navigation.ctaHref}>{navigation.ctaLabel}</a>
     </nav>
   </div>
 
   <nav class="mobile-menu" id="mobile-nav" aria-label="Mobile navigation" data-mobile-menu hidden>
     <div class="container mobile-menu-inner">
-      {navigation.links.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+      {navigation.links.map((link) => <a href={link.href}>{link.label}</a>)}
       <a class="btn btn-red" href={navigation.ctaHref}>{navigation.ctaLabel}</a>
     </div>
   </nav>
@@ -45,48 +41,48 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
 
 <script is:inline>
   (() => {
-    const header = document.querySelector('.topnav-wrap');
+    const header = document.querySelector(".topnav-wrap");
     if (!header) return;
 
-    const topnav = header.querySelector('.topnav');
-    const toggle = header.querySelector('[data-menu-toggle]');
-    const mobileMenu = header.querySelector('[data-mobile-menu]');
+    const topnav = header.querySelector(".topnav");
+    const toggle = header.querySelector("[data-menu-toggle]");
+    const mobileMenu = header.querySelector("[data-mobile-menu]");
     if (!topnav || !toggle || !mobileMenu) return;
 
     let closeTimer;
 
     const syncHeaderHeight = () => {
       const headerHeight = Math.ceil(topnav.getBoundingClientRect().height);
-      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+      document.documentElement.style.setProperty("--header-height", `${headerHeight}px`);
     };
 
     const syncHeaderState = () => {
-      const hero = document.querySelector('.hero');
+      const hero = document.querySelector(".hero");
       if (!hero) {
-        header.classList.add('is-scrolled');
+        header.classList.add("is-scrolled");
         return;
       }
 
       const headerHeight = Math.ceil(topnav.getBoundingClientRect().height);
       const heroBottom = hero.getBoundingClientRect().bottom;
-      header.classList.toggle('is-scrolled', heroBottom <= headerHeight + 12);
+      header.classList.toggle("is-scrolled", heroBottom <= headerHeight + 12);
     };
 
     const setOpen = (open) => {
       clearTimeout(closeTimer);
-      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute("aria-expanded", String(open));
 
       if (open) {
         mobileMenu.hidden = false;
         requestAnimationFrame(() => {
-          header.classList.add('is-open');
+          header.classList.add("is-open");
         });
         return;
       }
 
-      header.classList.remove('is-open');
+      header.classList.remove("is-open");
       closeTimer = window.setTimeout(() => {
-        const isStillClosed = toggle.getAttribute('aria-expanded') === 'false';
+        const isStillClosed = toggle.getAttribute("aria-expanded") === "false";
         if (isStillClosed) mobileMenu.hidden = true;
       }, 260);
     };
@@ -95,15 +91,15 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
     syncHeaderHeight();
     syncHeaderState();
 
-    toggle.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
       setOpen(!isOpen);
     });
 
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        const href = link.getAttribute('href');
-        const isHashLink = href && href.startsWith('#') && href.length > 1;
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+        const isHashLink = href && href.startsWith("#") && href.length > 1;
 
         if (!isHashLink) {
           setOpen(false);
@@ -120,14 +116,14 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
         setOpen(false);
 
         window.setTimeout(() => {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          window.history.pushState(null, '', href);
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState(null, "", href);
         }, 280);
       });
     });
 
     window.addEventListener(
-      'resize',
+      "resize",
       () => {
         syncHeaderHeight();
         syncHeaderState();
@@ -139,7 +135,7 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
     );
 
     window.addEventListener(
-      'scroll',
+      "scroll",
       () => {
         syncHeaderState();
       },
@@ -147,7 +143,7 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
     );
 
     window.addEventListener(
-      'load',
+      "load",
       () => {
         syncHeaderHeight();
         syncHeaderState();
@@ -155,15 +151,15 @@ const { brand, navigation, homeHref = '#top' } = Astro.props;
       { once: true }
     );
 
-    document.fonts
-      ?.ready?.then(() => {
+    document.fonts?.ready
+      ?.then(() => {
         syncHeaderHeight();
         syncHeaderState();
       })
       .catch(() => {});
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
         setOpen(false);
       }
     });

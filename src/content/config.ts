@@ -160,6 +160,9 @@ const projects = defineCollection({
     title: z.string(),
     period: z.string(),
     summary: z.string(),
+    image: z.string(),
+    ctaLabel: z.string(),
+    ctaHref: z.string(),
     status: z.enum(["active", "seasonal", "archived"]),
     order: z.number().int().nonnegative().default(99)
   })

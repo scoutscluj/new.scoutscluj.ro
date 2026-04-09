@@ -600,10 +600,32 @@ section.block {
   background: #fff;
 }
 
+.impact .container {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 22px 14px;
+}
+
+.impact .section-head {
+  grid-column: 1 / span 8;
+  align-items: start;
+  margin-bottom: 0;
+}
+
+.impact .section-head > div {
+  max-width: none;
+}
+
+.impact .section-head p,
+.impact-about p {
+  line-height: 1.56;
+}
+
 .impact-about {
+  grid-column: 1 / span 9;
   color: #5f5f5f;
   max-width: 82ch;
-  margin: 18px 0 0;
+  margin: 0;
 }
 
 .impact-about p {
@@ -611,6 +633,7 @@ section.block {
 }
 
 .impact-grid {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
@@ -679,15 +702,18 @@ section.block {
 }
 
 .pillars {
+  grid-column: 1 / -1;
   padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 0;
+  align-items: stretch;
 }
 
 .pillar {
   --box-radius: 14px;
+  height: 100%;
   padding: 14px;
 }
 
@@ -960,6 +986,16 @@ section.block {
   padding: 18px;
 }
 
+.projects-main-period {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
 .projects-main-content h3 {
   margin: 0;
   font-family: 'Sora', sans-serif;
@@ -988,9 +1024,34 @@ section.block {
 .project-card {
   --box-border: #e3e3e3;
   --box-radius: 14px;
+  width: 100%;
   padding: 12px;
   display: grid;
   gap: 7px;
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid rgba(207, 46, 46, 0.35);
+  outline-offset: 2px;
+}
+
+.project-card.is-active {
+  --box-border: var(--red);
+  background: linear-gradient(180deg, var(--red) 0%, #dd3b3b 100%);
+  color: #fff;
+}
+
+.project-card.is-active::before {
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .project-card time {
@@ -999,6 +1060,11 @@ section.block {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
+}
+
+.project-card.is-active time,
+.project-card.is-active p {
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .project-card h4 {
@@ -1345,6 +1411,18 @@ section.block {
 }
 
 @media (max-width: 920px) {
+  .impact .container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .impact .section-head,
+  .impact-about,
+  .impact-grid,
+  .pillars {
+    grid-column: 1 / -1;
+  }
+
   .impact-grid,
   .pillars,
   .timeline-row,

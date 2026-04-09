@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { section, projects } = Astro.props;
+const activeProject = projects[0];
 ---
 
 <section class="block projects">
@@ -15,29 +16,95 @@ const { section, projects } = Astro.props;
     <SectionHeader id={section.id} title={section.title} description={section.description} />
 
     <div class="projects-layout">
-      <article class="projects-main box-card">
-        <img src={section.featured.image} alt={section.featured.title} class="projects-main-image" loading="eager" />
+      <article
+        class="projects-main box-card"
+        data-project-panel
+      >
+        <img
+          src={activeProject?.data.image ?? section.featured.image}
+          alt={activeProject?.data.title ?? section.featured.title}
+          class="projects-main-image"
+          loading="eager"
+          data-project-image
+        />
         <div class="projects-main-overlay"></div>
         <div class="projects-main-content">
-          <h3>{section.featured.title}</h3>
-          <p>{section.featured.summary}</p>
+          <span class="projects-main-period" data-project-period>{activeProject?.data.period ?? ''}</span>
+          <h3 data-project-title>{activeProject?.data.title ?? section.featured.title}</h3>
+          <p data-project-summary>{activeProject?.data.summary ?? section.featured.summary}</p>
           <div class="projects-main-action">
-            <a class="btn btn-white" href={section.featured.ctaHref}>{section.featured.ctaLabel}</a>
+            <a class="btn btn-white" href={activeProject?.data.ctaHref ?? section.featured.ctaHref} data-project-link>
+              <span data-project-link-label>{activeProject?.data.ctaLabel ?? section.featured.ctaLabel}</span>
+            </a>
           </div>
         </div>
       </article>
 
-      <div class="projects-side">
+      <div class="projects-side" role="tablist" aria-label="Proiecte în focus">
         {
-          projects.map((project) => (
-            <article class="project-card box-card-border">
+          projects.map((project, index) => (
+            <button
+              type="button"
+              class:list={["project-card", "box-card-border", index === 0 && "is-active"]}
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              data-project-card
+              data-title={project.data.title}
+              data-period={project.data.period}
+              data-summary={project.data.summary}
+              data-image={project.data.image}
+              data-href={project.data.ctaHref}
+              data-cta-label={project.data.ctaLabel}
+            >
               <time>{project.data.period}</time>
               <h4>{project.data.title}</h4>
               <p>{project.data.summary}</p>
-            </article>
+            </button>
           ))
         }
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const panel = document.querySelector('[data-project-panel]');
+    const cards = Array.from(document.querySelectorAll('[data-project-card]'));
+    if (!panel || !cards.length) return;
+
+    const image = panel.querySelector('[data-project-image]');
+    const period = panel.querySelector('[data-project-period]');
+    const title = panel.querySelector('[data-project-title]');
+    const summary = panel.querySelector('[data-project-summary]');
+    const link = panel.querySelector('[data-project-link]');
+    const linkLabel = panel.querySelector('[data-project-link-label]');
+    if (!image || !period || !title || !summary || !link || !linkLabel) return;
+
+    const setActive = (card) => {
+      cards.forEach((item) => {
+        const active = item === card;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+
+      image.setAttribute('src', card.dataset.image ?? '');
+      image.setAttribute('alt', card.dataset.title ?? '');
+      period.textContent = card.dataset.period ?? '';
+      title.textContent = card.dataset.title ?? '';
+      summary.textContent = card.dataset.summary ?? '';
+      link.setAttribute('href', card.dataset.href ?? '#');
+      linkLabel.textContent = card.dataset.ctaLabel ?? 'Vezi detalii';
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => setActive(card));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setActive(card);
+        }
+      });
+    });
+  })();
+</script>
