@@ -92,7 +92,7 @@ timeline:
     - title: Septembrie · Start înscrieri
       description: Întâlniri de informare pentru părinți și noii membri.
     - title: Decembrie · Campanie socială
-      description: Proiect local cu parteneri și acțiuni de impact.
+      description: Proiect local cu parteneri și acțiuni de impact, în preajma sărbătorilor.
     - title: Mai · Festivalul Luminii
       description: Activare comunitară și voluntariat în spațiul urban.
     - title: August · Tabăra de vară
