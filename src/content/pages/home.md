@@ -87,20 +87,20 @@ projectsSection:
 timeline:
   id: calendar
   title: Calendar orientativ 2026
-  description: Flux clar pe parcursul anului, cu obiective de participare pentru copii, părinți și voluntari.
+  description: Unde ne găsești în 2026. Află când și cum te poți implica în povestea Scouts Cluj.
   items:
-    - title: Martie · Start înscrieri
+    - title: Septembrie · Start înscrieri
       description: Întâlniri de informare pentru părinți și noii membri.
+    - title: Decembrie · Campanie socială
+      description: Proiect local cu parteneri și acțiuni de impact.
     - title: Mai · Festivalul Luminii
       description: Activare comunitară și voluntariat în spațiul urban.
-    - title: Iulie · Tabăra de vară
-      description: Program outdoor intensiv, cu accent pe autonomie.
-    - title: Noiembrie · Campanie socială
-      description: Proiect local cu parteneri și acțiuni de impact.
+    - title: August · Tabăra de vară
+      description: Program outdoor intensiv, cu accent pe natură.
 storiesSection:
   id: povesti
   title: Ultimele povești
-  description: Carduri curate, cu imagine puternică și text scurt. Ușor de parcurs pe mobil.
+  description: "Dincolo de activități: impresii și povești scrise de cercetașii clujeni."
   ctaLabel: Toate poveștile
   ctaHref: https://scoutscluj.ro/blog/
 support:
