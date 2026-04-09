@@ -549,7 +549,7 @@ a {
   max-width: 16ch;
   font-family: 'Sora', sans-serif;
   font-size: clamp(2.1rem, 5.6vw, 4.4rem);
-  line-height: 1.04;
+  line-height: 1.2;
   letter-spacing: -0.045em;
 }
 
