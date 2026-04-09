@@ -59,6 +59,18 @@ const { brand, navigation } = Astro.props;
       document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
     };
 
+    const syncHeaderState = () => {
+      const hero = document.querySelector('.hero');
+      if (!hero) {
+        header.classList.add('is-scrolled');
+        return;
+      }
+
+      const headerHeight = Math.ceil(topnav.getBoundingClientRect().height);
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      header.classList.toggle('is-scrolled', heroBottom <= headerHeight + 12);
+    };
+
     const setOpen = (open) => {
       clearTimeout(closeTimer);
       toggle.setAttribute('aria-expanded', String(open));
@@ -80,6 +92,7 @@ const { brand, navigation } = Astro.props;
 
     setOpen(false);
     syncHeaderHeight();
+    syncHeaderState();
 
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
@@ -116,6 +129,7 @@ const { brand, navigation } = Astro.props;
       'resize',
       () => {
         syncHeaderHeight();
+        syncHeaderState();
         if (window.innerWidth > 760) {
           setOpen(false);
         }
@@ -123,8 +137,29 @@ const { brand, navigation } = Astro.props;
       { passive: true }
     );
 
-    window.addEventListener('load', syncHeaderHeight, { once: true });
-    document.fonts?.ready?.then(syncHeaderHeight).catch(() => {});
+    window.addEventListener(
+      'scroll',
+      () => {
+        syncHeaderState();
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'load',
+      () => {
+        syncHeaderHeight();
+        syncHeaderState();
+      },
+      { once: true }
+    );
+
+    document.fonts
+      ?.ready?.then(() => {
+        syncHeaderHeight();
+        syncHeaderState();
+      })
+      .catch(() => {});
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
